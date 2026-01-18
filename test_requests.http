@@ -1,0 +1,33 @@
+### Configuration
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### 1. Inscription (Register)
+# Crée un nouvel utilisateur.
+# Si vous obtenez une erreur 409 (Conflict), changez le phoneNumber.
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+    "phoneNumber": "691234567",
+    "password": "securePassword123",
+    "fullName": "Jean Testeur",
+    "role": "PASSENGER",
+    "email": "jean.testeur@example.com"
+}
+
+### 2. Connexion (Login)
+# Récupère le token JWT.
+# Copiez la valeur "access_token" de la réponse pour l'utiliser dans les requêtes authentifiées.
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+    "phoneNumber": "691234567",
+    "password": "securePassword123"
+}
+
+### 3. Exemple de requête authentifiée (À configurer plus tard)
+# Remplacez <VOTRE_TOKEN> par le token reçu lors du login
+# GET {{baseUrl}}/users
+# Authorization: Bearer <VOTRE_TOKEN>

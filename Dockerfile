@@ -1,6 +1,9 @@
 # Utiliser une image Node.js légère comme base
 FROM node:20-alpine AS builder
 
+# Install OpenSSL for Prisma
+RUN apk add --no-cache openssl
+
 # Définir le répertoire de travail
 WORKDIR /app
 
@@ -24,6 +27,9 @@ RUN pnpm run build
 
 # --- Étape de production ---
 FROM node:20-alpine AS runner
+
+# Install OpenSSL for Prisma
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 

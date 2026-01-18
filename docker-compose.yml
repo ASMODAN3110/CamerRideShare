@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   api:
     build:
@@ -10,6 +8,10 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: "postgresql://postgres:0901@postgres:5432/camerrideshare?schema=public"
+      JWT_SECRET: "52ccef3b-774d-4703-bb47-f7d9b66d8ed1"
+    command: >
+      sh -c "npx prisma db push && pnpm run start:prod"
+    restart: always
     depends_on:
       - postgres
     networks:
@@ -22,7 +24,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0901
+      POSTGRES_PASSWORD: "0901"
       POSTGRES_DB: camerrideshare
     volumes:
       - postgres_data:/var/lib/postgresql/data
